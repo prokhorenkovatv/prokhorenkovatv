@@ -1,6 +1,6 @@
 import { createReducer } from 'redux-act';
 import { savePosts, removePostLocally } from './actions';
-import { arrToHash, } from 'utils';
+import { arrToHash } from 'utils';
 
 const INITIAL_STATE = {
   allPosts: {},

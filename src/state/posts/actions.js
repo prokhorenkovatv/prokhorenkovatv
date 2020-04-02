@@ -1,7 +1,7 @@
 import { createAction } from 'redux-act';
 import { compose } from 'utils';
 // import * as api from 'api';
-import { PostDB } from '../../db';
+import { PostDB } from 'database/db';
 
 export const savePosts = createAction(
   'Posts have been successfully saved',

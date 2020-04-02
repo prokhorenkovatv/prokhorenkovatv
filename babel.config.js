@@ -15,7 +15,8 @@ module.exports = {
           api: './src/api',
           utils: './src/utils',
           services: './src/services',
-          styles: './src/styles'
+          styles: './src/styles',
+          database: './src/database'
         },
       },
     ],
