@@ -1,13 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
   View, Text, StyleSheet, Image, Button, ScrollView, Alert
 } from 'react-native';
-import { DATA } from '../../../data';
 import { THEME } from 'styles/theme';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  removePost,
+  updateBookedStatus,
+  selectPostById,
+  selectBookedStatusById
+} from 'state/posts';
+import { SCREENS } from 'navigation/constants';
 
+const PostScreen = ({ route, navigation }) => {
+  const dispatch = useDispatch();
 
-const PostScreen = ({ route }) => {
-  const post = DATA.find(p => p.id === route.params.postId);
+  const { postId } = route.params;
+
+  const post = useSelector(state =>
+    selectPostById(state, postId));
+
+  const booked = useSelector(state =>
+    selectBookedStatusById(state, postId));
+
+  useEffect(() => {
+    navigation.setParams({ booked })
+  }, [booked])
+
+  const toggleHandler = useCallback(() => {
+    dispatch(updateBookedStatus(post))
+  }, [dispatch, post])
+
+  useEffect(() => {
+    navigation.setParams({ toggleHandler })
+  }, [toggleHandler]);
 
   const removeHandler = () => {
     Alert.alert(
@@ -19,10 +45,20 @@ const PostScreen = ({ route }) => {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Remove", style: 'destructive', onPress: () => { } }
+        {
+          text: "Remove", style: 'destructive',
+          onPress: async () => {
+            await dispatch(removePost(postId))
+            return navigation.navigate(SCREENS.MAIN)
+          }
+        }
       ],
       { cancelable: false }
     );
+  };
+
+  if (!post) {
+    return null
   }
   return (
     <ScrollView>
@@ -31,7 +67,7 @@ const PostScreen = ({ route }) => {
         source={{ uri: post.img }}
       />
       <View style={styles.textWrap}>
-        <Text style={styles.title}>{post.text}</Text>
+        <Text style={styles.title}>{post.title}</Text>
       </View>
       <Button
         title="Delete"

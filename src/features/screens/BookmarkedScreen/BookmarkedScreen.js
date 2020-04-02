@@ -1,7 +1,8 @@
 import React from 'react';
 import { SCREENS } from 'navigation/constants';
-import { DATA } from '../../../data';
 import PostList from 'components/PostList';
+import { selectBookedList } from 'state/posts';
+import { useSelector } from 'react-redux'
 
 const BookmarkedScreen = ({ navigation }) => {
   const openPostHandler = post => {
@@ -14,9 +15,11 @@ const BookmarkedScreen = ({ navigation }) => {
     )
   };
 
+  const allBookedPosts = useSelector(state => selectBookedList(state));
+
   return (
     <PostList
-      data={DATA.filter(post => post.booked)}
+      data={allBookedPosts}
       onOpen={openPostHandler}
     />
   );

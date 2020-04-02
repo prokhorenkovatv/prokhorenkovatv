@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator }
@@ -56,7 +56,7 @@ const AppNavigation = () => {
           <Item
             title="Take photo"
             iconName="icon-camera"
-            onPress={() => navigation.dispatch(StackActions.replace(SCREENS.CREATE))}
+            onPress={() => navigation.navigate(SCREENS.CREATE)}
             buttonStyle={{ color: '#fff' }}
           />
         </HeaderButtons>) : null,
@@ -93,7 +93,7 @@ const AppNavigation = () => {
                 ? "icon-star"
                 : 'icon-empty-star'
             }
-            onPress={() => console.log('Pressed star')}
+            onPress={route.params.toggleHandler}
             buttonStyle={{ color: '#fff' }}
           />
         </HeaderButtons>),
@@ -163,6 +163,11 @@ const AppNavigation = () => {
         options={screenConfig('Post App', true)}
       />
       <Post.Screen
+        name={SCREENS.CREATE}
+        component={CreateScreen}
+        options={screenConfig('Create Post', false)}
+      />
+      <Post.Screen
         name={SCREENS.POST}
         component={PostScreen}
         options={postScreenConfig()}
@@ -187,11 +192,11 @@ const AppNavigation = () => {
     </Booked.Navigator>
   );
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
+    <NavigationContainer >
+      <Drawer.Navigator drawerContentOptions={{ activeTintColor: THEME.MAIN_COLOR, labelStyle: { fontFamily: 'OpenSans-Bold' } }}>
         <Drawer.Screen name="Home" component={HomeTabNavigator} />
         <Drawer.Screen name="About" component={AboutNavigator} />
-        <Drawer.Screen name="Create" component={CreateNavigator} />
+        <Drawer.Screen name="New Post" component={CreateNavigator} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

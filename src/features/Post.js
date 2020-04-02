@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Text,
+  TouchableOpacity
+} from 'react-native';
 
 const Post = ({ post, onOpen }) => {
   return (
@@ -19,7 +25,6 @@ const Post = ({ post, onOpen }) => {
         </ImageBackground>
       </View>
     </TouchableOpacity>
-
   )
 };
 
