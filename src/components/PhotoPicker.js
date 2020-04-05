@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Button } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import { THEME } from 'styles/theme';
+// import { THEME } from 'styles/theme';
+import { useTheme } from '@react-navigation/native';
 
 const PhotoPicker = ({ onPick }) => {
+  const theme = useTheme();
   const [fileUri, setImageUri] = useState(null);
 
   const takePhotoHandler = () => {
@@ -36,7 +38,7 @@ const PhotoPicker = ({ onPick }) => {
       <Button
         title="Take a photo"
         onPress={takePhotoHandler}
-        color={THEME.DANGER_COLOR}
+        color={theme.colors.danger}
       />
       {fileUri ?
         <Image

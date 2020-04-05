@@ -3,19 +3,20 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   Button,
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
-import { THEME } from 'styles/theme';
 import { useDispatch } from 'react-redux';
 import { createPost } from 'state/posts';
 import { SCREENS } from 'navigation/constants';
 import PhotoPicker from 'components/PhotoPicker';
+import { useTheme } from '@react-navigation/native';
+import { TextInput } from 'react-native-paper';
 
 const CreateScreen = ({ navigation }) => {
+  const theme = useTheme();
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const imgRef = useRef();
@@ -40,19 +41,26 @@ const CreateScreen = ({ navigation }) => {
         onPress={() => Keyboard.dismiss()}
       >
         <View style={styles.wrapper}>
-          <Text style={styles.title}>
+          <Text style={[styles.title, { color: theme.colors.text }]}>
             Create new post</Text>
           <TextInput
-            style={styles.textarea}
+            style={[styles.textarea, {
+              backgroundColor: theme.colors.border,
+              color: theme.colors.text,
+              borderColor: theme.colors.text
+
+            }]}
             placeholder="Enter text of your post"
+
             value={text}
             onChangeText={setText}
             multiline
+            mode='outlined'
           />
           <PhotoPicker onPick={photoPickHandler} />
           <Button
             title="Create post"
-            color={THEME.MAIN_COLOR}
+            color={theme.colors.primary}
             onPress={saveHandler}
             disabled={!text}
           />

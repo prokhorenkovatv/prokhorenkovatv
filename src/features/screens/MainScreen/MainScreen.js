@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SCREENS } from 'navigation/constants';
 import PostList from 'components/PostList';
 import { loadPosts, selectPostsList, selectLoading } from 'state/posts';
-import { THEME } from 'styles/theme';
+import { useTheme } from '@react-navigation/native';
 
 const MainScreen = ({ navigation }) => {
+  const theme = useTheme();
   const openPostHandler = post => {
     navigation.navigate(SCREENS.POST,
       {
@@ -28,7 +29,7 @@ const MainScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator color={THEME.MAIN_COLOR} />
+        <ActivityIndicator color={theme.colors.primary} />
       </View>
     )
   }

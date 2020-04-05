@@ -7,37 +7,44 @@ import CreateScreen from 'features/screens/CreateScreen/CreateScreen';
 import PostScreen from 'features/screens/PostScreen/PostScreen';
 import BookmarkedScreen from
   'features/screens/BookmarkedScreen/BookmarkedScreen';
-import { THEME } from 'styles/theme';
+// import { THEME } from 'styles/theme';
 import { Platform } from 'react-native';
 import AppHeaderIcon from 'components/AppHeaderIcon';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import Animated from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 const Post = createStackNavigator();
 const Booked = createStackNavigator();
 const About = createStackNavigator();
 const Create = createStackNavigator();
 
-const navigatorConfig = (screen) => ({
-  initialRouteName: { screen },
-  screenOptions: {
-    gestureEnabled: true,
-    geastureDirection: 'horizontal',
-    headerStyle: {
-      backgroundColor:
-        Platform.OS === 'android' ? THEME.MAIN_COLOR : '#fff'
+const navigatorConfig = (screen) => {
+  const theme = useTheme();
+  return {
+    initialRouteName: { screen },
+    screenOptions: {
+      gestureEnabled: true,
+      geastureDirection: 'horizontal',
+      headerStyle: {
+        backgroundColor:
+          Platform.OS === 'android' ? theme.colors.primary : theme.colors.card
+      },
+      headerTitleStyle: {
+        alignSelf: 'center',
+      },
+      headerTitleAlign: 'center',
+      headerTintColor:
+        Platform.OS === 'android' ? theme.colors.card : theme.colors.primary,
+      headerBackTitleVisible: false,
     },
-    headerTitleStyle: {
-      alignSelf: 'center',
-    },
-    headerTitleAlign: 'center',
-    headerTintColor:
-      Platform.OS === 'android' ? '#fff' : THEME.MAIN_COLOR,
-    headerBackTitleVisible: false,
-  },
-  headerMode: "float"
-});
+    headerMode: "float"
+  }
+};
 
 const screenConfig = (screenTitle, isHeaderRightShown) => {
+  const theme = useTheme();
   return ({ navigation }) => ({
     title: screenTitle,
     headerRight: isHeaderRightShown ? () => (
@@ -48,7 +55,7 @@ const screenConfig = (screenTitle, isHeaderRightShown) => {
           title="Take photo"
           iconName="icon-camera"
           onPress={() => navigation.navigate(SCREENS.CREATE)}
-          buttonStyle={{ color: '#fff' }}
+          buttonStyle={{ color: theme.colors.card }}
         />
       </HeaderButtons>) : null,
     headerLeft: () => (
@@ -59,20 +66,21 @@ const screenConfig = (screenTitle, isHeaderRightShown) => {
           title="Toggle Drawer"
           iconName="icon-menu"
           onPress={() => navigation.toggleDrawer()}
-          buttonStyle={{ color: '#fff' }}
+          buttonStyle={{ color: theme.colors.card }}
         />
       </HeaderButtons>)
   })
 };
 
 const postScreenConfig = () => {
+  const theme = useTheme();
   return ({ route }) => ({
     title:
       `Post from ${new Date(route.params.date).toLocaleDateString()}`,
     headerStyle: {
-      backgroundColor: THEME.DANGER_COLOR
+      backgroundColor: theme.colors.danger
     },
-    headerTintColor: '#fff',
+    headerTintColor: theme.colors.card,
     headerRight: () => (
       <HeaderButtons
         HeaderButtonComponent={AppHeaderIcon}
@@ -85,33 +93,39 @@ const postScreenConfig = () => {
               : 'icon-empty-star'
           }
           onPress={route.params.toggleHandler}
-          buttonStyle={{ color: '#fff' }}
+          buttonStyle={{ color: theme.colors.card }}
         />
       </HeaderButtons>),
   })
 };
 
-export const AboutNavigator = () => (
-  <About.Navigator
-    {...navigatorConfig(SCREENS.ABOUT)}
-  >
-    <About.Screen
-      name={SCREENS.ABOUT}
-      component={AboutScreen}
-      options={screenConfig('About App', false)} />
-  </About.Navigator>
+export const AboutNavigator = ({ style }) => (
+  <Animated.View style={[styles.stack, style]}>
+    <About.Navigator
+      {...navigatorConfig(SCREENS.ABOUT)}
+    >
+      <About.Screen
+        name={SCREENS.ABOUT}
+        component={AboutScreen}
+        options={screenConfig('About App', false)} />
+    </About.Navigator>
+  </Animated.View>
+
 );
 
-export const CreateNavigator = () => (
-  <Create.Navigator
-    {...navigatorConfig(SCREENS.CREATE)}
-  >
-    <Create.Screen
-      name={SCREENS.CREATE}
-      component={CreateScreen}
-      options={screenConfig('Create Post', false)}
-    />
-  </Create.Navigator>
+export const CreateNavigator = ({ style }) => (
+  <Animated.View style={[styles.stack, style]}>
+    <Create.Navigator
+      {...navigatorConfig(SCREENS.CREATE)}
+    >
+      <Create.Screen
+        name={SCREENS.CREATE}
+        component={CreateScreen}
+        options={screenConfig('Create Post', false)}
+      />
+    </Create.Navigator>
+  </Animated.View>
+
 );
 
 export const PostNavigator = () => (
@@ -153,3 +167,17 @@ export const BookedNavigator = () => (
   </Booked.Navigator>
 );
 
+
+const styles = StyleSheet.create({
+  stack: {
+    flex: 1,
+    shadowColor: '#fff',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 5,
+  },
+})

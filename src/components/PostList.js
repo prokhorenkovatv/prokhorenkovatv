@@ -2,12 +2,19 @@ import React from 'react';
 import { View, StyleSheet, FlatList, Text } from 'react-native';
 import Post from 'features/Post';
 import { isEmpty } from 'utils';
+import { useTheme } from '@react-navigation/native';
 
 const PostList = ({ data, onOpen }) => {
+  const theme = useTheme();
   if (isEmpty(data)) {
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.noItems}>No posts yet</Text>
+        <Text
+          style={[styles.noItems,
+          { color: theme.colors.text }]}
+        >
+          No posts yet
+        </Text>
       </View>
     )
   }

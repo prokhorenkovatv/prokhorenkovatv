@@ -8,7 +8,10 @@ const resolveIcon = name =>
     'icon-star': 't',
     'icon-empty-star': 'e',
     'icon-menu': 'm',
-    'icon-list': 'l'
+    'icon-list': 'l',
+    'icon-home': 'h',
+    'icon-quill': 'q',
+    'icon-info': 'i'
   }[name]);
 
 const Icon = ({ name, style }) => (
@@ -20,7 +23,7 @@ export default Icon;
 const styles = StyleSheet.create({
   icon: {
     fontFamily: 'estimate',
-    color: 'white',
+    color: '#fff',
     fontSize: 24
   },
 });

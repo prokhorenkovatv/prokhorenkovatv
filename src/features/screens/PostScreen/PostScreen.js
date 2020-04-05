@@ -2,7 +2,6 @@ import React, { useEffect, useCallback } from 'react';
 import {
   View, Text, StyleSheet, Image, Button, ScrollView, Alert
 } from 'react-native';
-import { THEME } from 'styles/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   removePost,
@@ -11,8 +10,10 @@ import {
   selectBookedStatusById
 } from 'state/posts';
 import { SCREENS } from 'navigation/constants';
+import { useTheme } from '@react-navigation/native';
 
 const PostScreen = ({ route, navigation }) => {
+  const theme = useTheme();
   const dispatch = useDispatch();
 
   const { postId } = route.params;
@@ -67,11 +68,16 @@ const PostScreen = ({ route, navigation }) => {
         source={{ uri: post.img }}
       />
       <View style={styles.textWrap}>
-        <Text style={styles.title}>{post.title}</Text>
+        <Text
+          style={[styles.title,
+          { color: theme.colors.text }]}
+        >
+          {post.title}
+        </Text>
       </View>
       <Button
         title="Delete"
-        color={THEME.DANGER_COLOR}
+        color={theme.colors.danger}
         onPress={removeHandler}
       />
     </ScrollView>
