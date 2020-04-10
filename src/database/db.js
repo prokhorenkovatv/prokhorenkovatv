@@ -2,28 +2,43 @@ import SQLite from 'react-native-sqlite-storage';
 SQLite.DEBUG(true);
 SQLite.enablePromise(false);
 
-const db = SQLite.openDatabase({ name: 'rnPosts' },
-  () => { },
-  error => {
-    console.log("ERROR: " + error);
-  });
-
+const db = SQLite.openDatabase({ name: 'rnPosts' });
 
 export class PostDB {
-  static init() {
+  static init = () => {
     return new Promise((resolve, reject) => {
-      db.transaction((tx) => {
+      db.transaction(tx => {
         tx.executeSql(
-          'CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY NOT NULL, text TEXT NOT NULL, img TEXT, date TEXT, booked INT)',
+          'CREATE TABLE IF NOT EXISTS posts ' +
+          '(id INTEGER PRIMARY KEY NOT NULL, ' +
+          'title TEXT NOT NULL, date TEXT, ' +
+          'booked INT, img TEXT)',
           [],
           (_, result) => resolve(result),
           (_, error) => reject(error)
-        )
+        );
       })
     })
   }
 
-  static getPosts() {
+  //FOR TESTING PURPOSES - Checking table's existence(1st query) and table's column info (2nd query)
+  static checkTable = () => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          // "SELECT name FROM sqlite_master WHERE name='posts'",
+          "PRAGMA table_info(posts)",
+          [],
+          (_, result) => {
+            console.log(result.rows.raw());
+            return resolve(result)
+          },
+          (_, error) => reject(error))
+      })
+    })
+  }
+
+  static getPosts = async () => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
@@ -36,12 +51,13 @@ export class PostDB {
     })
   }
 
-  static createPost({ title, date, booked, img }) {
+
+  static createPost = (post) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          `INSERT INTO posts (title, date, booked, img) VALUES (?, ?, ?, ?)`,
-          [title, date, 0, img],
+          `INSERT INTO posts (title, date, booked, img) VALUES (?,?,?,?)`,
+          [post.title, post.date, 0, post.img],
           (_, result) => resolve(result.insertId),
           (_, error) => reject(error)
         )

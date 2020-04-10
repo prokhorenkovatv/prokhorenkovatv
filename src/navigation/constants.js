@@ -3,5 +3,6 @@ export const SCREENS = {
   ABOUT: 'AboutScreen',
   BOOKED: 'BookmarkedScreen',
   POST: 'PostScreen',
-  CREATE: 'CreateScreen'
+  CREATE: 'CreateScreen',
+  SECRET: 'SecretScreen'
 }

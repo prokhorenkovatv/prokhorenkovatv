@@ -7,13 +7,13 @@ import CreateScreen from 'features/screens/CreateScreen/CreateScreen';
 import PostScreen from 'features/screens/PostScreen/PostScreen';
 import BookmarkedScreen from
   'features/screens/BookmarkedScreen/BookmarkedScreen';
-// import { THEME } from 'styles/theme';
 import { Platform } from 'react-native';
 import AppHeaderIcon from 'components/AppHeaderIcon';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import Animated from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import SecretScreen from 'features/screens/SecretScreen/SecretScreen';
 
 const Post = createStackNavigator();
 const Booked = createStackNavigator();
@@ -108,6 +108,10 @@ export const AboutNavigator = ({ style }) => (
         name={SCREENS.ABOUT}
         component={AboutScreen}
         options={screenConfig('About App', false)} />
+      <About.Screen
+        name={SCREENS.SECRET}
+        component={SecretScreen}
+        options={screenConfig('Secret screen', false)} />
     </About.Navigator>
   </Animated.View>
 

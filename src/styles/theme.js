@@ -9,6 +9,7 @@ export const AppDarkTheme = {
     background: "#010101", //black
     border: "#272729", //darkgrey
     card: "#121212",
+    gradient: '#cecece',
     grey: '#cecece',
     primary: "#3f7bc8", //blue
     danger: '#d81b60',
@@ -20,6 +21,7 @@ export const AppDefaultTheme = {
     background: '#f2f2f2', //light
     border: "#f2f2f2", //lightgrey
     card: "#fff",
+    gradient: '#cecece',
     grey: '#cecece',
     primary: "#3f7bc8", //blue
     danger: '#d81b60',

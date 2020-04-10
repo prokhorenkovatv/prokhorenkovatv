@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image, Button } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-// import { THEME } from 'styles/theme';
 import { useTheme } from '@react-navigation/native';
 
 const PhotoPicker = ({ onPick }) => {
   const theme = useTheme();
-  const [fileUri, setImageUri] = useState(null);
+  const [imageUri, setImageUri] = useState(null);
 
   const takePhotoHandler = () => {
     let options = {
@@ -16,8 +15,6 @@ const PhotoPicker = ({ onPick }) => {
       },
     };
     ImagePicker.launchCamera(options, (response) => {
-      console.log('Response = ', response);
-
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
@@ -26,8 +23,6 @@ const PhotoPicker = ({ onPick }) => {
         console.log('User tapped custom button: ', response.customButton);
         alert(response.customButton);
       } else {
-        const source = { uri: response.uri };
-        console.log('response', JSON.stringify(response));
         setImageUri(response.uri);
         onPick(response.uri);
       }
@@ -40,17 +35,16 @@ const PhotoPicker = ({ onPick }) => {
         onPress={takePhotoHandler}
         color={theme.colors.danger}
       />
-      {fileUri ?
+      {imageUri ?
         <Image
-          source={{ uri: fileUri }}
+          source={{ uri: imageUri }}
           style={styles.image}
         />
         : <Image
           source={require('assets/notAvailable.jpg')}
           style={styles.image}
         />}
-    </View>
-  );
+    </View>);
 }
 
 export default PhotoPicker;

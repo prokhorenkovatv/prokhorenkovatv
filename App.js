@@ -7,10 +7,20 @@ import { PostDB } from 'database/db';
 import SplashScreen from 'react-native-splash-screen';
 
 const App = () => {
+  const initializeDatabase = async () => {
+    try {
+      await PostDB.init();
+      // await PostDB.checkTable();
+      SplashScreen.hide();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
-    PostDB.init();
-    // SplashScreen.hide();
+    initializeDatabase();
   }, []);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

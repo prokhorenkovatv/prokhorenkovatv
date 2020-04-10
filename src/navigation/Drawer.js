@@ -12,7 +12,7 @@ import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import DrawerContent from 'navigation/DrawerContent';
 import { useTheme } from 'react-native-paper';
-
+import LinearGradient from 'react-native-linear-gradient';
 const Drawer = createDrawerNavigator();
 
 export default ({ toggleTheme }) => {
@@ -29,35 +29,41 @@ export default ({ toggleTheme }) => {
   const animatedStyle = { borderRadius, transform: [{ scale }] };
   const theme = useTheme();
   return (
-    <Drawer.Navigator
-      drawerType="slide"
-      overlayColor="transparent"
-      drawerStyle={[styles.drawerStyles, { backgroundColor: theme.colors.border }]}
-      drawerContentOptions={
-        {
-          activeBackgroundColor: 'transparent',
-          activeTintColor: theme.colors.text,
-          inactiveTintColor: theme.colors.text,
-          labelStyle: {
-            fontFamily: 'OpenSans-Bold'
-          }
-        }}
-      sceneContainerStyle={{ backgroundColor: theme.colors.border }}
-      drawerContent={props => {
-        setProgress(props.progress);
-        return <DrawerContent {...props} toggleTheme={toggleTheme} />
-      }}
+    <LinearGradient
+      colors={[theme.colors.border, theme.colors.gradient]}
+      style={{ flex: 1 }}
     >
-      <Drawer.Screen name="Home">
-        {props => <HomeTabNavigator {...props} style={animatedStyle} />}
-      </Drawer.Screen>
-      <Drawer.Screen name="About">
-        {props => <AboutNavigator {...props} style={animatedStyle} />}
-      </Drawer.Screen>
-      <Drawer.Screen name="New Post">
-        {props => <CreateNavigator {...props} style={animatedStyle} />}
-      </Drawer.Screen>
-    </Drawer.Navigator >
+      <Drawer.Navigator
+        drawerType="slide"
+        overlayColor="transparent"
+        drawerStyle={[styles.drawerStyles, { backgroundColor: 'transparent' }]}
+        drawerContentOptions={
+          {
+            activeBackgroundColor: 'transparent',
+            activeTintColor: theme.colors.text,
+            inactiveTintColor: theme.colors.text,
+            labelStyle: {
+              fontFamily: 'OpenSans-Bold'
+            }
+          }}
+        sceneContainerStyle={{ backgroundColor: 'transparent' }}
+        drawerContent={props => {
+          setProgress(props.progress);
+          return <DrawerContent {...props} toggleTheme={toggleTheme} />
+        }}
+      >
+        <Drawer.Screen name="Home">
+          {props => <HomeTabNavigator {...props} style={animatedStyle} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="About">
+          {props => <AboutNavigator {...props} style={animatedStyle} />}
+        </Drawer.Screen>
+        <Drawer.Screen name="New Post">
+          {props => <CreateNavigator {...props} style={animatedStyle} />}
+        </Drawer.Screen>
+      </Drawer.Navigator >
+    </LinearGradient>
+
 
   );
 };
