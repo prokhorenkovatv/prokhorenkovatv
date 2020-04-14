@@ -7,11 +7,11 @@ import { View, StyleSheet } from 'react-native';
 import {
   Text,
   TouchableRipple,
-  useTheme,
   Switch,
   Drawer,
   Avatar
 } from 'react-native-paper';
+import { useTheme } from '@react-navigation/native';
 
 const DrawerContent = (props) => {
   const theme = useTheme();

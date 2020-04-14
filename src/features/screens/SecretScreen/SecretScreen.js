@@ -6,18 +6,24 @@ const SecretScreen = ({ navigation }) => {
   const theme = useTheme();
   return (
     <View style={styles.center}>
-      <Text style={[styles.text, { color: theme.colors.text }]}>Haha! It was me here all a long!</Text>
-      <Image source={require('assets/cute.jpg')} style={styles.image} />
+      <Text style={
+        [styles.text,
+        { color: theme.colors.text }]}>
+        Haha! It was me here all a long!
+      </Text>
+      <Image
+        source={require('assets/cute.jpg')}
+        style={styles.image}
+      />
       <View
         style={styles.button}
       >
         <Button
-          title={'Go back'}
+          title='Go back'
           onPress={() => navigation.goBack()}
           color={theme.colors.primary}
         />
       </View>
-
     </View>
   );
 }

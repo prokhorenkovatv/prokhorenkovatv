@@ -1,9 +1,9 @@
-import PushNotification from 'react-native-push-notification'
+import PushNotification from 'react-native-push-notification';
 import * as RootNavigation from 'navigation/RootNavigation.js';
 import { SCREENS } from 'navigation/constants';
 
 PushNotification.configure({
-  onNotification: function (notification) {
+  onNotification: notification => {
     console.log('LOCAL NOTIFICATION ==>', notification)
     return RootNavigation.navigate(SCREENS.SECRET);
   },
@@ -16,7 +16,7 @@ export const LocalNotification = () => {
   PushNotification.localNotification({
     autoCancel: true,
     bigText:
-      'Do you want to see our secret screen? Press here, bro/sis',
+      'La la la la la la la la',
     subText: 'Posts App Notification',
     title: 'Good news!',
     message: 'Expand me to see more',

@@ -35,8 +35,7 @@ const navigatorConfig = (screen) => {
         alignSelf: 'center',
       },
       headerTitleAlign: 'center',
-      headerTintColor:
-        Platform.OS === 'android' ? theme.colors.card : theme.colors.primary,
+      headerTintColor: theme.colors.card,
       headerBackTitleVisible: false,
     },
     headerMode: "float"
@@ -47,17 +46,20 @@ const screenConfig = (screenTitle, isHeaderRightShown) => {
   const theme = useTheme();
   return ({ navigation }) => ({
     title: screenTitle,
+    headerTintColor: theme.colors.card,
     headerRight: isHeaderRightShown ? () => (
       <HeaderButtons
         HeaderButtonComponent={AppHeaderIcon}
       >
         <Item
-          title="Take photo"
+          title="Take a photo"
           iconName="icon-camera"
           onPress={() => navigation.navigate(SCREENS.CREATE)}
           buttonStyle={{ color: theme.colors.card }}
         />
-      </HeaderButtons>) : null,
+      </HeaderButtons>
+    )
+      : null,
     headerLeft: () => (
       <HeaderButtons
         HeaderButtonComponent={AppHeaderIcon}
@@ -68,7 +70,8 @@ const screenConfig = (screenTitle, isHeaderRightShown) => {
           onPress={() => navigation.toggleDrawer()}
           buttonStyle={{ color: theme.colors.card }}
         />
-      </HeaderButtons>)
+      </HeaderButtons>
+    )
   })
 };
 
@@ -114,7 +117,6 @@ export const AboutNavigator = ({ style }) => (
         options={screenConfig('Secret screen', false)} />
     </About.Navigator>
   </Animated.View>
-
 );
 
 export const CreateNavigator = ({ style }) => (

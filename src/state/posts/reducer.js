@@ -14,7 +14,6 @@ export default createReducer(
       allPosts: {
         ...state.allPosts,
         ...arrToHash(posts),
-
       },
       loading: false
     }),

@@ -67,9 +67,9 @@ const CreateScreen = ({ navigation }) => {
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>
-
   );
 }
+
 const styles = StyleSheet.create({
   wrapper: {
     padding: 10

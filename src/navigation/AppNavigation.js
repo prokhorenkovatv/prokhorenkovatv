@@ -26,15 +26,14 @@ const CombinedDarkTheme = {
 
 const AppNavigation = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+
   useEffect(() => {
     isMountedRef.current = true;
-
     return () => (isMountedRef.current = false);
   }, []);
+
   const theme = isDarkTheme ? CombinedDarkTheme : CombinedDefaultTheme;
-  const toggleTheme = async () => {
-    setIsDarkTheme(isDark => !isDark);
-  }
+  const toggleTheme = async () => setIsDarkTheme(isDark => !isDark);
 
   return (
     <PaperProvider theme={theme}>

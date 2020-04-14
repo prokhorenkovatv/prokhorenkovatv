@@ -8,6 +8,7 @@ import { useTheme } from '@react-navigation/native';
 
 const MainScreen = ({ navigation }) => {
   const theme = useTheme();
+
   const openPostHandler = post => {
     navigation.navigate(SCREENS.POST,
       {
@@ -29,7 +30,7 @@ const MainScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator color={theme.colors.primary} />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     )
   }

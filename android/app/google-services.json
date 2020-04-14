@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "595466133766",
+    "firebase_url": "https://rnquizapp.firebaseio.com",
+    "project_id": "rnquizapp",
+    "storage_bucket": "rnquizapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595466133766:android:6e73aa699324b5da9dbe87",
+        "android_client_info": {
+          "package_name": "com.rnpostsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595466133766-tnh01rc1r21kneo4aho04jmik1q3ktdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rnpostsapp",
+            "certificate_hash": "ed90f56265a0c6d3e70cab788530115a49f5c4e6"
+          }
+        },
+        {
+          "client_id": "595466133766-ijoumbd35qbjco9e3lgvd6rcoec2mbuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6h9uLK7VEZgd6ZokyU5muOyUvqf4fj8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595466133766-ijoumbd35qbjco9e3lgvd6rcoec2mbuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

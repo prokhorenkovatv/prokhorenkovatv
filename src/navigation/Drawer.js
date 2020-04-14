@@ -11,8 +11,9 @@ import {
 import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import DrawerContent from 'navigation/DrawerContent';
-import { useTheme } from 'react-native-paper';
+import { useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+
 const Drawer = createDrawerNavigator();
 
 export default ({ toggleTheme }) => {
@@ -36,7 +37,10 @@ export default ({ toggleTheme }) => {
       <Drawer.Navigator
         drawerType="slide"
         overlayColor="transparent"
-        drawerStyle={[styles.drawerStyles, { backgroundColor: 'transparent' }]}
+        drawerStyle={
+          [styles.drawerStyles,
+          { backgroundColor: 'transparent' }]
+        }
         drawerContentOptions={
           {
             activeBackgroundColor: 'transparent',
@@ -63,8 +67,6 @@ export default ({ toggleTheme }) => {
         </Drawer.Screen>
       </Drawer.Navigator >
     </LinearGradient>
-
-
   );
 };
 

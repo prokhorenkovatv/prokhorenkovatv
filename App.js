@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { PostDB } from 'database/db';
 import SplashScreen from 'react-native-splash-screen';
+import RemotePushController from 'services/RemotePushController';
 
 const App = () => {
   const initializeDatabase = async () => {
@@ -25,6 +26,7 @@ const App = () => {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <AppNavigation />
+        <RemotePushController />
       </PersistGate>
     </Provider>
   )
